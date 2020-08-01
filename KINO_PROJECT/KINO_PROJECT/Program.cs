@@ -10,7 +10,6 @@ namespace KINO_PROJECT
     {
         static void Main(string[] args)
         {
-
         }
     }
 }

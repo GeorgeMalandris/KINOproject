@@ -15,5 +15,6 @@ namespace KINO_PROJECT
         void ShowDrawNumbers();
         void calcEarning();
         void runDraw();
+
     }
 }
