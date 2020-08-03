@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="IKino.cs" />
     <Compile Include="KINO.cs" />
+    <Compile Include="KinoHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
