@@ -56,7 +56,7 @@ namespace KINO_PROJECT
                 result = "ONLY";
             else
                 result = "DRAW";
-            if (choice == result && choice != "DRAW")
+            if (choice == result && result != "DRAW")
                 totalEarnings += 2 * moneyBet;
             else if (choice == result)
                 totalEarnings += 4 * moneyBet;

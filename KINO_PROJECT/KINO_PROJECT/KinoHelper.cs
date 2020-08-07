@@ -10,6 +10,7 @@ namespace KINO_PROJECT
     {
         public static void PlayKino()
         {
+            Console.Clear();
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             string separator = "__________________________________________";
 
@@ -78,60 +79,55 @@ namespace KINO_PROJECT
             //The selection is done with the Left/Right arrows and the choice is returned as the Type of the array
 
             Console.WriteLine("Use Arrow Left/Right and press Enter to choose\n");
-            string toDisplay = "";
-
             for (int i = 0; i < menuChoices.Count(); i++)
             {
-                toDisplay += menuChoices[i].ToString() + " ";
+                Console.Write(menuChoices[i].ToString() + " ");
             }
-            toDisplay = toDisplay.Trim();
-            Console.WriteLine(toDisplay);
 
             ConsoleKey k;
             int cursorPositionX = 0;
-            int cursorPositionY = Console.CursorTop - 1;
+            int cursorPositionY = Console.CursorTop;
+
+            int windowInitialize = Console.WindowWidth;
 
             int choice = 0;
             do
             {
                 int previusChoice = choice;
-                Console.CursorLeft = cursorPositionX;
-                Console.CursorTop = cursorPositionY;
-
                 Console.CursorVisible = false;
+                Console.CursorLeft = cursorPositionX;
+
                 Console.BackgroundColor = ConsoleColor.Cyan;
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.Write(menuChoices[choice]);
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(".");
+                Console.ResetColor();
 
                 Console.CursorLeft = cursorPositionX;
 
                 k = Console.ReadKey(true).Key;
+                if (Console.WindowWidth < windowInitialize)
+                    Console.WindowWidth = windowInitialize;
 
                 if (k == ConsoleKey.RightArrow)
                 {
-                    cursorPositionX = Console.CursorLeft + (menuChoices[choice].ToString().Length + 1);
-                    choice++;
+                    if (choice < menuChoices.Count() - 1)
+                    {
+                        cursorPositionX += (menuChoices[choice].ToString().Length + 1);
+                        choice++;
+                    }
                 }
                 else if (k == ConsoleKey.LeftArrow)
                 {
-                    choice--;
-                    if (choice < 0)
-                        choice = 0;
-                    cursorPositionX = Console.CursorLeft - (menuChoices[choice].ToString().Length + 1);
-                }
-                if (cursorPositionX < 0)
-                {
-                    cursorPositionX = 0;
-                    choice = 0;
-                }
-                else if (cursorPositionX > toDisplay.Count() - 1)
-                {
-                    choice = menuChoices.Length - 1;
-                    cursorPositionX = toDisplay.Count() - (menuChoices[choice].ToString().Length);
+                    if (choice > 0)
+                    {
+                        choice--;
+                        cursorPositionX -= (menuChoices[choice].ToString().Length + 1);
+                    }
                 }
 
-                Console.ResetColor();
-                Console.Write(menuChoices[previusChoice] + " ");
+                Console.Write(menuChoices[previusChoice]);
                 Console.CursorLeft = cursorPositionX;
 
             } while (k != ConsoleKey.Enter);
@@ -140,61 +136,5 @@ namespace KINO_PROJECT
             Console.CursorVisible = true;
             return menuChoices[choice];
         }
-        public static int menuSelect(string menuOptions, int numberOfOptions)
-        {
-            //The menuOptions is a string with \n as separator e.g. "Option 1\nOption 2\nOption 3\nOption 4"
-            //The selection is done with the Up/Down arrows and the choice is returned as an integer
-
-            Console.WriteLine("Use Arrow Up/Down and press Enter to choose");
-
-            ConsoleKey k;
-
-            int cursorInitialize = Console.CursorTop;
-            int cursorPositionY = cursorInitialize;
-            int minChoicePosition = cursorInitialize;
-            int maxChoicePosition = cursorInitialize + numberOfOptions - 1;
-
-            Console.WriteLine(menuOptions);
-            string[] menuChoices = menuOptions.Split('\n');
-
-            int choice;
-            do
-            {
-                choice = cursorPositionY - cursorInitialize + 1;
-                Console.CursorVisible = false;
-                Console.CursorLeft = 0;
-                Console.CursorTop = cursorPositionY;
-
-                Console.BackgroundColor = ConsoleColor.Cyan;
-                Console.ForegroundColor = ConsoleColor.Black;
-                Console.Write(menuChoices[choice - 1]);
-
-                Console.CursorLeft = 0;
-
-                k = Console.ReadKey(true).Key;
-                if (k == ConsoleKey.UpArrow)
-                {
-                    cursorPositionY = Console.CursorTop - 1;
-                }
-                else if (k == ConsoleKey.DownArrow)
-                {
-                    cursorPositionY = Console.CursorTop + 1;
-                }
-                if (cursorPositionY < minChoicePosition)
-                    cursorPositionY = minChoicePosition;
-                else if (cursorPositionY > maxChoicePosition)
-                    cursorPositionY = maxChoicePosition;
-                else if (k == ConsoleKey.Enter)
-                    cursorPositionY = maxChoicePosition + 1;
-
-                Console.ResetColor();
-                Console.Write(menuChoices[choice - 1]);
-                Console.CursorLeft = 0;
-
-                Console.SetCursorPosition(0, cursorPositionY);
-            } while (k != ConsoleKey.Enter);
-            Console.CursorVisible = true;
-            return choice;
-        }   
     }
 }
