@@ -67,10 +67,12 @@ namespace KINO_PROJECT
             for (int i = 1; i <= numberofDraws; i++)
             {
                 drawNumbers.Clear();
-                for (int j = 1; j <= 20; j++)
+                do
                 {
-                    drawNumbers.Add(ran.Next(1,81));
-                }
+                    int nextDraw = ran.Next(1, 81);
+                    if (!drawNumbers.Contains(nextDraw))
+                        drawNumbers.Add(nextDraw);
+                } while (drawNumbers.Count < 20);
                 calcEarning();
                 ShowDrawNumbers();
                 Console.WriteLine();
