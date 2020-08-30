@@ -16,9 +16,9 @@ namespace KINO_PROJECT
 
             Console.WriteLine("Welcome to KINO.\nThese are the numbers of our game:\n");
             showNumbers();
-            Console.WriteLine("\nIn each round 20 numbers of the above are drawn.\nYou win 2 times your bet if you have correctly predicted ONLY or EVEN \nand 4 times your bet if you have correctly predicted DRAW.");
+            Console.WriteLine("\nIn each round 20 numbers of the above are drawn.\nYou win 2 times your bet if you have correctly predicted ODD or EVEN \nand 4 times your bet if you have correctly predicted DRAW.");
 
-            Console.WriteLine("\nYou bet if most of the KINO lottery numbers are ONLY, EVEN or if it will be DRAW.");
+            Console.WriteLine("\nYou bet if most of the KINO lottery numbers are ODD, EVEN or if it will be DRAW.");
             string choice = playersChoice();
             Console.WriteLine("\nYou chose: {0}", choice);
             Console.WriteLine(separator);
@@ -56,7 +56,7 @@ namespace KINO_PROJECT
         }
         public static string playersChoice()
         {
-            string[] menu1 = new string[] { "ONLY", "EVEN", "DRAW" };
+            string[] menu1 = new string[] { "ODD", "EVEN", "DRAW" };
             string playersChoice = menuSelect(menu1);
             return playersChoice;
         }

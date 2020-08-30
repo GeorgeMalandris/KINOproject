@@ -53,7 +53,7 @@ namespace KINO_PROJECT
             if (evenCounter > onlyCounter)
                 result = "EVEN";
             else if (evenCounter < onlyCounter)
-                result = "ONLY";
+                result = "ODD";
             else
                 result = "DRAW";
             if (choice == result && result != "DRAW")
